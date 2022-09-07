@@ -14,6 +14,7 @@ requirements = [
     "pylc3.core",
     "enum34",
     "six",
+    "terminaltables",
 ]
 
 setup(
