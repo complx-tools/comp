@@ -1,0 +1,6 @@
+pip==21.0
+setuptools
+wheel
+pylc3.core
+enum34
+six

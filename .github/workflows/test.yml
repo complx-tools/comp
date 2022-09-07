@@ -1,0 +1,30 @@
+name: Test
+
+on:
+  workflow_dispatch:
+  push:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.8'
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        sudo add-apt-repository ppa:tricksterguy87/complx
+        sudo apt-get update -qq
+        # Build dependencies
+        sudo apt-get install -y castxml libpython3-dev libboost-python-dev liblc3-dev liblc3-plugins
+        pip3 install --upgrade scikit-build pygccxml pyplusplus
+        pip3 install -r requirements.txt
+    - name: Run Test
+      run: |
+       python3 -m pylc3.comp.test_comp
